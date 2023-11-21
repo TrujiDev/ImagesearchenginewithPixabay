@@ -57,7 +57,7 @@ function showError(msg) {
 
 function searchImages(term) {
 	const key = '40811969-30a7a3d37c6a7d7c437503f02';
-	const url = `https://pixabay.com/api/?key=${key}&q=${term}&per_page=${imagesPerPage}&page=${iterator.next().value}`;
+	const url = `https://pixabay.com/api/?key=${key}&q=${term}&per_page=${imagesPerPage}`;
 
 	fetch(url)
 		.then(response => response.json())
@@ -67,7 +67,7 @@ function searchImages(term) {
 		});
 }
 
-function pagination(total) {
+function *pagination(total) {
 	for (let i = 1; i <= total; i++) {
 		yield i;
 	}
