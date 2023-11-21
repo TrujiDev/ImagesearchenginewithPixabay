@@ -5,6 +5,7 @@ const paginationDiv = document.querySelector('#pagination');
 const imagesPerPage = 30;
 let totalPages;
 let iterator;
+let currentPage = 1;
 
 window.onload = () => {
 	form.addEventListener('submit', validateForm);
@@ -13,14 +14,14 @@ window.onload = () => {
 function validateForm(evt) {
 	evt.preventDefault();
 
-	const term = document.querySelector('#term').value;
+	const searchTerm = document.querySelector('#term').value;
 
-	if (term.trim() === '') {
+	if (searchTerm.trim() === '') {
 		showError('Please enter a search term');
 		return;
 	}
 
-	searchImages(term);
+	searchImages();
 }
 
 function showError(msg) {
@@ -55,9 +56,11 @@ function showError(msg) {
 	}
 }
 
-function searchImages(term) {
+function searchImages() {
+	const term = document.querySelector('#term').value;
+
 	const key = '40811969-30a7a3d37c6a7d7c437503f02';
-	const url = `https://pixabay.com/api/?key=${key}&q=${term}&per_page=${imagesPerPage}`;
+	const url = `https://pixabay.com/api/?key=${key}&q=${term}&per_page=${imagesPerPage}&page=${currentPage}`;
 
 	fetch(url)
 		.then(response => response.json())
@@ -129,8 +132,8 @@ function printIterator() {
 		);
 
 		button.onclick = () => {
-			const page = parseInt(button.dataset.page);
-			searchImages(document.querySelector('#term').value);
+			currentPage = value;
+			searchImages();
 		};
 
 		paginationDiv.appendChild(button);
