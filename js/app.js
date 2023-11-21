@@ -3,6 +3,7 @@ const form = document.querySelector('#form');
 
 const imagesPerPage = 30;
 let totalPages;
+let iterator;
 
 window.onload = () => {
 	form.addEventListener('submit', validateForm);
@@ -65,6 +66,16 @@ function searchImages(term) {
 		});
 }
 
+function pagination(total) {
+	for (let i = 1; i <= total; i++) {
+		yield i;
+	}
+}
+
+function calculatePages(total) {
+	return parseInt(Math.ceil(total / imagesPerPage));
+}
+
 function showImages(imgs) {
 	while (result.firstChild) {
 		result.removeChild(result.firstChild);
@@ -86,8 +97,10 @@ function showImages(imgs) {
 			</div>
 		`;
 	});
+
+	printIterator();
 }
 
-function calculatePages(total) {
-	return parseInt(Math.ceil(total / imagesPerPage));
+function printIterator() {
+	iterator = pagination(totalPages);
 }
