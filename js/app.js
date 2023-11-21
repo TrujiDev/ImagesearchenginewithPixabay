@@ -11,6 +11,10 @@ window.onload = () => {
 	form.addEventListener('submit', validateForm);
 };
 
+/**
+ * Validates the form input and performs a search for images.
+ * @param {Event} evt - The event object.
+ */
 function validateForm(evt) {
 	evt.preventDefault();
 
@@ -24,6 +28,11 @@ function validateForm(evt) {
 	searchImages();
 }
 
+/**
+ * Displays an error message on the page.
+ *
+ * @param {string} msg - The error message to be displayed.
+ */
 function showError(msg) {
 	const alert = document.querySelector('.alert');
 
@@ -56,6 +65,9 @@ function showError(msg) {
 	}
 }
 
+/**
+ * Performs a search for images using the Pixabay API.
+ */
 function searchImages() {
 	const term = document.querySelector('#term').value;
 
@@ -70,16 +82,32 @@ function searchImages() {
 		});
 }
 
-function *pagination(total) {
+/**
+ * Generates a pagination iterator for a given total number.
+ *
+ * @param {number} total - The total number of pages.
+ * @returns {Iterator<number>} - The pagination iterator.
+ */
+function* pagination(total) {
 	for (let i = 1; i <= total; i++) {
 		yield i;
 	}
 }
 
+/**
+ * Calculates the number of pages based on the total number of images and the number of images per page.
+ * @param {number} total - The total number of images.
+ * @returns {number} - The number of pages.
+ */
 function calculatePages(total) {
 	return parseInt(Math.ceil(total / imagesPerPage));
 }
 
+/**
+ * Displays a collection of images on the webpage.
+ *
+ * @param {Array} imgs - An array of image objects.
+ */
 function showImages(imgs) {
 	while (result.firstChild) {
 		result.removeChild(result.firstChild);
@@ -109,6 +137,10 @@ function showImages(imgs) {
 	printIterator();
 }
 
+/**
+ * Prints the iterator values and creates buttons for each value.
+ * @returns {void}
+ */
 function printIterator() {
 	iterator = pagination(totalPages);
 
