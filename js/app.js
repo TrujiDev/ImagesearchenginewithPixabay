@@ -14,6 +14,8 @@ function validateForm(evt) {
 		showError('Please enter a search term');
 		return;
 	}
+
+	searchImages(term);
 }
 
 function showError(msg) {
@@ -47,3 +49,16 @@ function showError(msg) {
 		}, 3000);
 	}
 }
+
+function searchImages(term) {
+	const key = '40811969-30a7a3d37c6a7d7c437503f02';
+	const url = `https://pixabay.com/api/?key=${key}&q=${term}`;
+
+	fetch(url)
+		.then(response => response.json())
+		.then(data => {
+			showImages(data.hits);
+		});
+}
+
+function showImages(imgs) {}
