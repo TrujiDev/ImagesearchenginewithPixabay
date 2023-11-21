@@ -1,6 +1,9 @@
 const result = document.querySelector('#result');
 const form = document.querySelector('#form');
 
+const imagesPerPage = 30;
+let totalPages;
+
 window.onload = () => {
 	form.addEventListener('submit', validateForm);
 };
@@ -57,6 +60,7 @@ function searchImages(term) {
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
+			totalPages = calculatePages(data.totalHits);
 			showImages(data.hits);
 		});
 }
@@ -82,4 +86,8 @@ function showImages(imgs) {
 			</div>
 		`;
 	});
+}
+
+function calculatePages(total) {
+	return parseInt(Math.ceil(total / imagesPerPage));
 }
