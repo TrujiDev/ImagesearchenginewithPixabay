@@ -65,8 +65,10 @@ function showError(msg) {
 	}
 }
 
+
 /**
- * Performs a search for images using the Pixabay API.
+ * Searches for images using the Pixabay API.
+ * @returns {Promise<void>} A promise that resolves when the images are fetched and displayed.
  */
 async function searchImages() {
 	const term = document.querySelector('#term').value;
