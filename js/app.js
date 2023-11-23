@@ -74,6 +74,13 @@ async function searchImages() {
 	const key = '40811969-30a7a3d37c6a7d7c437503f02';
 	const url = `https://pixabay.com/api/?key=${key}&q=${term}&per_page=${imagesPerPage}&page=${currentPage}`;
 
+	// fetch(url)
+	// 	.then(response => response.json())
+	// 	.then(data => {
+	// 		totalPages = calculatePages(data.totalHits);
+	// 		showImages(data.hits);
+	// 	});
+
 	try {
 		const response = await fetch(url);
 		const data = await response.json();
